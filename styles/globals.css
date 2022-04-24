@@ -3,11 +3,15 @@
 @tailwind utilities;
 
 @layer utilities {
-    .f_center {
-        @apply flex items-center justify-center;
-    }
+  .f_center {
+    @apply flex items-center justify-center;
+  }
+}
+
+body {
+  font-family: "Nunito", sans-serif;
 }
 
 .nav-link {
-    @apply pr-5 ;
+  @apply pr-5 ;
 }
