@@ -1,0 +1,69 @@
+@import "./variables.scss";
+@tailwind base;
+@layer base {
+    h1 {
+        @apply text-4xl font-bold;
+    }
+
+    h2 {
+        @apply text-3xl font-bold;
+    }
+
+    h3 {
+        @apply text-2xl font-bold;
+    }
+
+    h4 {
+      @apply text-xl font-bold;
+    }
+}
+
+@tailwind components;
+
+@tailwind utilities;
+@layer utilities {
+    .shadow-darker {
+        box-shadow: 5px 5px #010101;
+    
+        &:active {
+            transform: translate(4px, 4px);
+            box-shadow: 1px 1px #010101;
+        }
+    }
+}
+
+@layer utilities {
+    .f_center {
+        @apply flex items-center justify-center;
+    }
+}
+
+body {
+    font-family: "Nunito", sans-serif;
+}
+
+
+.btn {
+    @apply inline-flex mx-3 items-center justify-center font-bold no-underline cursor-pointer select-none bg-transparent py-2 px-3 text-lg transition-all ease-linear;
+    line-height: 1.5;
+    vertical-align: middle;
+}
+
+@mixin btnColors($shadow, $border, $color) {
+    border: $border;
+    color: $color;
+    border-radius: 3px;
+    margin: 10px;
+
+    &:active {
+        transform: translate(4px, 4px);
+        box-shadow: 1px 1px $shadow;
+    }
+}
+
+@each $color in $colors {
+    .btn-#{$color} {
+        @include btnColors($dark, $dark-border, $white);
+        @apply bg-#{$color}-500;
+    }
+}
