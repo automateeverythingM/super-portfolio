@@ -15,7 +15,7 @@ export const Section = ({
     const { className: OClassName, ...restOuter } = outer;
     const { className: IClassName, ...restInner } = inner;
     return (
-        <div className={clsx("", OClassName)} {...restOuter}>
+        <div className={clsx("py-24", OClassName)} {...restOuter}>
             <div className={clsx("container mx-auto", IClassName)} {...restInner}>
                 {children}
             </div>

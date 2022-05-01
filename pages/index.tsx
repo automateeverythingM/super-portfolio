@@ -1,10 +1,12 @@
 import type { NextPage } from "next";
 import Head from "next/head";
+import Image from "next/image";
+import { Emoji } from "src/components/emoji/emoji";
 import { Section } from "src/components/section/section";
 
 const Home: NextPage = () => {
   return (
-    <div>
+    <>
       <Head>
         <title>Marko Pavic | Javascript Developer</title>
         <meta
@@ -14,13 +16,31 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
-        <h1 className="text-center">Home page</h1>
-        <Section>
-          <h1>HERO</h1>
-        </Section>
-      </main>
-    </div>
+      <Section outer={{ className: "bg-yellow-500 pt-56" }} inner={{ className: "flex flex-column" }}>
+        <div className="flex-1 flex flex-col justify-center items-center">
+          <div className="max-w-lg">
+            <h1 className="text-6xl mb-5">
+              <Emoji symbol="👋" label="wave hand" /> Hi! I'm Marko
+            </h1>
+            <p className="text-xl">
+              I`m a Javascript developer from Serbia.
+              <br />
+              I love programming and I love solving problems.
+            </p>
+          </div>
+        </div>
+        <div className="flex-1 flex items-center justify-center">
+          <div className="border-8 border-slate-50 border-solid">
+            <Image
+              alt="Marko Pavic avatar"
+              src="https://picsum.photos/400"
+              width="400px"
+              height="400px"
+            />
+          </div>
+        </div>
+      </Section>
+    </>
   );
 };
 
