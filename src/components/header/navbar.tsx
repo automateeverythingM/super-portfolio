@@ -1,64 +1,93 @@
-import Link from "next/link";
-import Image from "next/image";
+// components
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import clsx from "clsx";
 
-// components
-import { ToggleButton } from "../button/ToggleButton";
+//components
+import { HamburgerButton } from "../button/hamburgerButton";
 import { Logo } from "../logo/logo";
+import { NavLinks } from "./navLinks";
 
-// assets
-import tv from "../../assets/img/tv.png";
+//hooks
+import { useScrollLock } from "src/hooks/useScrollLock";
 
-interface INavbarProps { }
+interface INavbarProps {}
 
-export const Navbar = ({ }: INavbarProps) => {
-    const toggleTheme = () => {
-        document.body.classList.toggle("dark");
-    };
+export const Navbar = ({}: INavbarProps) => {
+	const [isOffTop, setIsOffTop] = useState<boolean>(false);
+	const [isOpen, setIsOpen] = useState<boolean>(false);
+	const { lockScroll, unlockScroll } = useScrollLock();
 
-    return (
-        <div className="flex justify-center">
-            <div className="flex items-center container absolute">
-                <nav className="flex w-full justify-between items-center py-5">
-                    <Logo />
-                    <ul className="flex">
-                        <li>
-                            <Link href="/projects">
-                                <a className="btn btn-purple shadow-darker">
-                                    Projects
-                                </a>
-                            </Link>
-                        </li>
-                        <li>
-                            <Link href="/components">
-                                <a className="btn btn-green shadow-darker">
-                                    Components
-                                </a>
-                            </Link>
-                        </li>
-                        <li>
-                            <Link href="/about">
-                                <a className="btn btn-yellow shadow-darker">
-                                    About
-                                </a>
-                            </Link>
-                        </li>
-                    </ul>
-                </nav>
-                <div>
-                    <ToggleButton onToggle={toggleTheme}>
-                        {(toggle) => (
-                            <Image
-                                alt="color tv"
-                                src={tv}
-                                width="100px"
-                                height="100px"
-                                className={clsx({ grayscale: toggle })}
-                            />
-                        )}
-                    </ToggleButton>
-                </div>
-            </div>
-        </div>
-    );
+	useEffect(() => {
+		handleScrollOffset();
+		window.addEventListener("scroll", handleScrollOffset);
+		window.addEventListener("resize", handleResize);
+
+		return () => {
+			window.removeEventListener("scroll", handleScrollOffset);
+			window.removeEventListener("resize", handleResize);
+		};
+	}, []);
+
+	const handleScrollOffset = useCallback(() => {
+		if (window.scrollY > 0) {
+			setIsOffTop(true);
+		} else {
+			setIsOffTop(false);
+		}
+	}, []);
+
+	const setIsOpenWrapper = useCallback(() => {
+		setIsOpen((prev) => {
+			if (prev) {
+				unlockScroll();
+			} else {
+				lockScroll();
+			}
+			return !prev;
+		});
+	}, []);
+
+	const handleResize = useCallback(() => {
+		if (window.matchMedia("(min-width: 768px)").matches) {
+			unlockScroll();
+			setIsOpen(false);
+		}
+	}, []);
+
+	const toggleOpen = useCallback(
+		() => setIsOpenWrapper(),
+		[setIsOpenWrapper]
+	);
+
+	return (
+		<header
+			className={clsx(
+				"sticky top-0 bg-white border-b-2",
+				isOffTop ? "border-black bg-slate-50" : "border-white"
+			)}
+		>
+			<div className="flex items-center container">
+				<nav className="w-full justify-between items-center py-5 flex ">
+					<Logo
+						className={clsx(
+							"z-10",
+							isOffTop
+								? "text-lg h-16 w-16"
+								: "text-4xl h-24 w-24"
+						)}
+					/>
+					<NavLinks ulClassName="bg-white hidden md:flex" />
+					<NavLinks
+						ulClassName={clsx(
+							"flex flex-col fixed inset-0 items-center justify-center transition-all duration-500 bg-stone-50 md:hidden",
+							{ "translate-x-full": !isOpen }
+						)}
+						liClassName="w-full text-center"
+						aClassName="max-w-sm w-full"
+					/>
+				</nav>
+				<HamburgerButton isOpen={isOpen} onClick={toggleOpen} />
+			</div>
+		</header>
+	);
 };

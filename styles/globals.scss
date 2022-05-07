@@ -1,69 +1,112 @@
 @import "./variables.scss";
 @tailwind base;
 @layer base {
-    h1 {
-        @apply text-4xl font-bold;
-    }
+	h1 {
+		@apply text-4xl font-bold;
+	}
 
-    h2 {
-        @apply text-3xl font-bold;
-    }
+	h2 {
+		@apply text-3xl font-bold;
+	}
 
-    h3 {
-        @apply text-2xl font-bold;
-    }
+	h3 {
+		@apply text-2xl font-bold;
+	}
 
-    h4 {
-      @apply text-xl font-bold;
-    }
+	h4 {
+		@apply text-xl font-bold;
+	}
 }
 
 @tailwind components;
 
 @tailwind utilities;
 @layer utilities {
-    .shadow-darker {
-        box-shadow: 5px 5px #010101;
-    
-        &:active {
-            transform: translate(4px, 4px);
-            box-shadow: 1px 1px #010101;
-        }
-    }
+	.shadow-darker {
+		box-shadow: 5px 5px #010101;
+
+		&:active {
+			transform: translate(4px, 4px);
+			box-shadow: 1px 1px #010101;
+		}
+	}
 }
 
 @layer utilities {
-    .f_center {
-        @apply flex items-center justify-center;
-    }
+	.f_center {
+		@apply flex items-center justify-center;
+	}
 }
 
 body {
-    font-family: "Nunito", sans-serif;
+	font-family: "Nunito", sans-serif;
 }
+
+.ham-button {
+	@apply h-8 w-10 absolute top-10 right-10 z-10 flex flex-col justify-between cursor-pointer md:hidden;
+
+	& div {
+		@apply h-1 w-full rounded-sm bg-black;
+	}
+
+	& div:first-child {
+		transform-origin: 0% 0%;
+		transition: transform 0.3s ease-in-out;
+	}
+
+    & div:nth-child(2) {
+        transition: transform 0.2s ease-in-out;
+    }
+
+	& div:last-child {
+		transform-origin: 0% 100%;
+		transition: transform 0.3s ease-in-out;
+	}
+}
+
+.ham-close {
+	& div:first-child {
+		transform: rotate(45deg);
+	}
+
+	& div:nth-child(2) {
+		transform: scaleY(0);
+	}
+
+	& div:last-child {
+		transform: rotate(-45deg);
+	}
+}
+
 
 
 .btn {
-    @apply inline-flex mx-3 items-center justify-center font-bold no-underline cursor-pointer select-none bg-transparent py-2 px-3 text-lg transition-all ease-linear;
-    line-height: 1.5;
-    vertical-align: middle;
+	@apply inline-flex mx-3 items-center justify-center font-bold no-underline cursor-pointer select-none bg-transparent py-2 px-3 text-lg transition-all ease-linear;
+	line-height: 1.5;
+	vertical-align: middle;
+}
+
+.shadow-logo {
+	box-shadow: 0 0 0 5px black;
 }
 
 @mixin btnColors($shadow, $border, $color) {
-    border: $border;
-    color: $color;
-    border-radius: 3px;
-    margin: 10px;
+	border: $border;
+	color: $color;
+	border-radius: 3px;
+	margin: 10px;
 
-    &:active {
-        transform: translate(4px, 4px);
-        box-shadow: 1px 1px $shadow;
-    }
+	@apply dark:bg-stone-500 dark:text-white;
+
+	&:active {
+		transform: translate(4px, 4px);
+		box-shadow: 1px 1px $shadow;
+	}
 }
 
 @each $color in $colors {
-    .btn-#{$color} {
-        @include btnColors($dark, $dark-border, $white);
-        @apply bg-#{$color}-500;
-    }
+	.btn-#{$color} {
+		@include btnColors($dark, $dark-border, $white);
+		@apply bg-#{$color}-500;
+	}
 }

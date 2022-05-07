@@ -1,13 +1,22 @@
-import Link from "next/link";
+import clsx from "clsx";
+import { InnerLink } from "../button/innerLink";
 
-interface ILogoProps { }
+interface ILogoProps {
+	className?: string;
+}
 
-export const Logo = ({ }: ILogoProps) => {
-    return (
-        <div className="flex w-full sm:w-auto justify-center">
-            <Link href="/">
-                <a className="f_center rounded-full bg-black text-white h-24 w-24 mx-3">MP</a>
-            </Link>
-        </div>
-    );
+export const Logo = ({ className }: ILogoProps) => {
+	return (
+		<div className="flex w-full sm:w-auto justify-center">
+			<InnerLink
+				href="/"
+				className={clsx(
+					"f_center rounded-full bg-red-700 text-white mx-3 font-bold border-8 border-red-500 transition-all",
+					className
+				)}
+			>
+				MP
+			</InnerLink>
+		</div>
+	);
 };
