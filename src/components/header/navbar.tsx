@@ -83,7 +83,7 @@ export const Navbar = ({}: INavbarProps) => {
 							{ "translate-x-full": !isOpen }
 						)}
 						liClassName="w-48 sm:w-full text-center"
-						aClassName="max-w-sm w-full"
+						aClassName="max-w-sm w-full !mx-0"
 					/>
 				</nav>
 				<HamburgerButton isOpen={isOpen} onClick={toggleOpen} />
