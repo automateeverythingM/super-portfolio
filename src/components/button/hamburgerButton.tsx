@@ -4,7 +4,7 @@ import { ToggleButton } from "./toggleButton";
 
 interface IHamburgerButtonProps {
 	isOpen: boolean;
-	onClick: (event: React.MouseEvent<HTMLDivElement>) => void;
+	onClick?: (event: React.MouseEvent<HTMLDivElement>) => void;
 }
 
 export const HamburgerButton = ({ isOpen, onClick }: IHamburgerButtonProps) => {
