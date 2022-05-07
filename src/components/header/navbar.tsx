@@ -67,7 +67,7 @@ export const Navbar = ({}: INavbarProps) => {
 			)}
 		>
 			<div className="flex items-center container">
-				<nav className="w-full justify-between items-center py-5 flex ">
+				<nav className="w-full justify-between items-center py-5 flex w-">
 					<Logo
 						className={clsx(
 							"z-10",
@@ -82,7 +82,7 @@ export const Navbar = ({}: INavbarProps) => {
 							"flex flex-col fixed inset-0 items-center justify-center transition-all duration-500 bg-stone-50 md:hidden",
 							{ "translate-x-full": !isOpen }
 						)}
-						liClassName="w-full text-center"
+						liClassName="w-48 sm:w-full text-center"
 						aClassName="max-w-sm w-full"
 					/>
 				</nav>

@@ -43,7 +43,7 @@ body {
 }
 
 .ham-button {
-	@apply h-8 w-10 absolute top-10 right-10 z-10 flex flex-col justify-between cursor-pointer md:hidden;
+	@apply h-8 w-10 absolute top-10 right-5 sm:right-10 z-10 flex flex-col justify-between cursor-pointer md:hidden;
 
 	& div {
 		@apply h-1 w-full rounded-sm bg-black;

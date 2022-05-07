@@ -7,7 +7,7 @@ interface ILogoProps {
 
 export const Logo = ({ className }: ILogoProps) => {
 	return (
-		<div className="flex w-full sm:w-auto justify-center">
+		<div className="flex w-full sm:w-auto">
 			<InnerLink
 				href="/"
 				className={clsx(
