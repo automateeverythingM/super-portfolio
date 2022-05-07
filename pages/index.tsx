@@ -1,10 +1,6 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 
-// components
-import { HeroSection } from "src/sections/home/heroSection";
-import { PresentationSection } from "src/sections/home/presentationSection";
-
 const Home: NextPage = () => {
 	return (
 		<>
